@@ -1,0 +1,11 @@
+name: koroche
+description: A Helm charts for Kubernetes application
+version: 0.0.3
+home: https://my.domain/
+sources:
+  - https://github.com/alexadastra/koroche
+maintainers:
+  - name: Aleksey Semenchenko
+    email: aasemenchenko@edu.hse.ru
+engine: gotpl
+apiVersion: v2
