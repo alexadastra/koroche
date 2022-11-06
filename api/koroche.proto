@@ -11,6 +11,18 @@ service Koroche {
       body: "*"
     };
   }
+  rpc AddURL(AddURLRequest) returns (AddURLResponse) {
+    option (google.api.http) = {
+      post: "/v1/url/add"
+      body: "*"
+    };
+  }
+  rpc GetURL(GetURLRequest) returns (GetURLResponse) {
+    option (google.api.http) = {
+      post: "/v1/url/get"
+      body: "*"
+    };
+  }
 }
 
 message PingRequest {
@@ -20,4 +32,34 @@ message PingRequest {
 message PingResponse {
   int64 code = 1;
   string value = 2;
+}
+
+message AddURLRequest {
+  URL url = 1;
+}
+
+message AddURLResponse {
+  ShortURL short_url = 1;
+  Error error = 2;
+}
+
+message GetURLRequest {
+  URL url = 1;
+}
+
+message GetURLResponse {
+  ShortURL short_url = 1;
+  Error error = 2;
+}
+
+message ShortURL {
+  string value = 1;
+}
+
+message URL {
+  string value = 1;
+}
+
+message Error {
+  string value = 1;
 }

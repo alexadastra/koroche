@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	service2 "github.com/alexadastra/koroche/internal/app/service"
+	impl "github.com/alexadastra/koroche/internal/koroche"
 
 	"github.com/alexadastra/ramme/config"
 	"github.com/alexadastra/ramme/service"
@@ -48,7 +48,7 @@ func main() {
 
 	// Setup gRPC servers.
 	baseGrpcServer := grpc.NewServer()
-	userGrpcServer := service2.NewKoroche()
+	userGrpcServer := impl.NewKoroche()
 	api.RegisterKorocheServer(baseGrpcServer, userGrpcServer)
 
 	// Setup gRPC gateway.

@@ -42,9 +42,119 @@
           "Koroche"
         ]
       }
+    },
+    "/v1/url/add": {
+      "post": {
+        "operationId": "Koroche_AddURL",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/korocheAddURLResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/korocheAddURLRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Koroche"
+        ]
+      }
+    },
+    "/v1/url/get": {
+      "post": {
+        "operationId": "Koroche_GetURL",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/korocheGetURLResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/korocheGetURLRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Koroche"
+        ]
+      }
     }
   },
   "definitions": {
+    "korocheAddURLRequest": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "$ref": "#/definitions/korocheURL"
+        }
+      }
+    },
+    "korocheAddURLResponse": {
+      "type": "object",
+      "properties": {
+        "short_url": {
+          "$ref": "#/definitions/korocheShortURL"
+        },
+        "error": {
+          "$ref": "#/definitions/korocheError"
+        }
+      }
+    },
+    "korocheError": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "korocheGetURLRequest": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "$ref": "#/definitions/korocheURL"
+        }
+      }
+    },
+    "korocheGetURLResponse": {
+      "type": "object",
+      "properties": {
+        "short_url": {
+          "$ref": "#/definitions/korocheShortURL"
+        },
+        "error": {
+          "$ref": "#/definitions/korocheError"
+        }
+      }
+    },
     "korochePingRequest": {
       "type": "object",
       "properties": {
@@ -60,6 +170,22 @@
           "type": "string",
           "format": "int64"
         },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "korocheShortURL": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "korocheURL": {
+      "type": "object",
+      "properties": {
         "value": {
           "type": "string"
         }

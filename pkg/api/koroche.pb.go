@@ -127,6 +127,351 @@ func (x *PingResponse) GetValue() string {
 	return ""
 }
 
+type AddURLRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Url *URL `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+}
+
+func (x *AddURLRequest) Reset() {
+	*x = AddURLRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_koroche_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddURLRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddURLRequest) ProtoMessage() {}
+
+func (x *AddURLRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_koroche_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddURLRequest.ProtoReflect.Descriptor instead.
+func (*AddURLRequest) Descriptor() ([]byte, []int) {
+	return file_koroche_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *AddURLRequest) GetUrl() *URL {
+	if x != nil {
+		return x.Url
+	}
+	return nil
+}
+
+type AddURLResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ShortUrl *ShortURL `protobuf:"bytes,1,opt,name=short_url,json=shortUrl,proto3" json:"short_url,omitempty"`
+	Error    *Error    `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+}
+
+func (x *AddURLResponse) Reset() {
+	*x = AddURLResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_koroche_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddURLResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddURLResponse) ProtoMessage() {}
+
+func (x *AddURLResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_koroche_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddURLResponse.ProtoReflect.Descriptor instead.
+func (*AddURLResponse) Descriptor() ([]byte, []int) {
+	return file_koroche_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AddURLResponse) GetShortUrl() *ShortURL {
+	if x != nil {
+		return x.ShortUrl
+	}
+	return nil
+}
+
+func (x *AddURLResponse) GetError() *Error {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
+type GetURLRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Url *URL `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+}
+
+func (x *GetURLRequest) Reset() {
+	*x = GetURLRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_koroche_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetURLRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetURLRequest) ProtoMessage() {}
+
+func (x *GetURLRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_koroche_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetURLRequest.ProtoReflect.Descriptor instead.
+func (*GetURLRequest) Descriptor() ([]byte, []int) {
+	return file_koroche_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetURLRequest) GetUrl() *URL {
+	if x != nil {
+		return x.Url
+	}
+	return nil
+}
+
+type GetURLResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ShortUrl *ShortURL `protobuf:"bytes,1,opt,name=short_url,json=shortUrl,proto3" json:"short_url,omitempty"`
+	Error    *Error    `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+}
+
+func (x *GetURLResponse) Reset() {
+	*x = GetURLResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_koroche_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetURLResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetURLResponse) ProtoMessage() {}
+
+func (x *GetURLResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_koroche_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetURLResponse.ProtoReflect.Descriptor instead.
+func (*GetURLResponse) Descriptor() ([]byte, []int) {
+	return file_koroche_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetURLResponse) GetShortUrl() *ShortURL {
+	if x != nil {
+		return x.ShortUrl
+	}
+	return nil
+}
+
+func (x *GetURLResponse) GetError() *Error {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
+type ShortURL struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *ShortURL) Reset() {
+	*x = ShortURL{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_koroche_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ShortURL) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ShortURL) ProtoMessage() {}
+
+func (x *ShortURL) ProtoReflect() protoreflect.Message {
+	mi := &file_koroche_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ShortURL.ProtoReflect.Descriptor instead.
+func (*ShortURL) Descriptor() ([]byte, []int) {
+	return file_koroche_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ShortURL) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+type URL struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *URL) Reset() {
+	*x = URL{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_koroche_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *URL) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*URL) ProtoMessage() {}
+
+func (x *URL) ProtoReflect() protoreflect.Message {
+	mi := &file_koroche_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use URL.ProtoReflect.Descriptor instead.
+func (*URL) Descriptor() ([]byte, []int) {
+	return file_koroche_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *URL) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+type Error struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *Error) Reset() {
+	*x = Error{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_koroche_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Error) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Error) ProtoMessage() {}
+
+func (x *Error) ProtoReflect() protoreflect.Message {
+	mi := &file_koroche_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Error.ProtoReflect.Descriptor instead.
+func (*Error) Descriptor() ([]byte, []int) {
+	return file_koroche_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Error) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
 var File_koroche_proto protoreflect.FileDescriptor
 
 var file_koroche_proto_rawDesc = []byte{
@@ -139,13 +484,49 @@ var file_koroche_proto_rawDesc = []byte{
 	0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x63,
 	0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12,
 	0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
-	0x76, 0x61, 0x6c, 0x75, 0x65, 0x32, 0x53, 0x0a, 0x07, 0x4b, 0x6f, 0x72, 0x6f, 0x63, 0x68, 0x65,
-	0x12, 0x48, 0x0a, 0x04, 0x50, 0x69, 0x6e, 0x67, 0x12, 0x14, 0x2e, 0x6b, 0x6f, 0x72, 0x6f, 0x63,
-	0x68, 0x65, 0x2e, 0x50, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x15,
-	0x2e, 0x6b, 0x6f, 0x72, 0x6f, 0x63, 0x68, 0x65, 0x2e, 0x50, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x13, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x0d, 0x22, 0x08, 0x2f,
-	0x76, 0x31, 0x2f, 0x70, 0x69, 0x6e, 0x67, 0x3a, 0x01, 0x2a, 0x42, 0x09, 0x5a, 0x07, 0x70, 0x6b,
-	0x67, 0x2f, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x2f, 0x0a, 0x0d, 0x41, 0x64, 0x64, 0x55, 0x52, 0x4c, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x6b, 0x6f, 0x72, 0x6f, 0x63, 0x68, 0x65, 0x2e, 0x55, 0x52,
+	0x4c, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x22, 0x66, 0x0a, 0x0e, 0x41, 0x64, 0x64, 0x55, 0x52, 0x4c,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2e, 0x0a, 0x09, 0x73, 0x68, 0x6f, 0x72,
+	0x74, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x6b, 0x6f,
+	0x72, 0x6f, 0x63, 0x68, 0x65, 0x2e, 0x53, 0x68, 0x6f, 0x72, 0x74, 0x55, 0x52, 0x4c, 0x52, 0x08,
+	0x73, 0x68, 0x6f, 0x72, 0x74, 0x55, 0x72, 0x6c, 0x12, 0x24, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f,
+	0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0e, 0x2e, 0x6b, 0x6f, 0x72, 0x6f, 0x63, 0x68,
+	0x65, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x22, 0x2f,
+	0x0a, 0x0d, 0x47, 0x65, 0x74, 0x55, 0x52, 0x4c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x1e, 0x0a, 0x03, 0x75, 0x72, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x6b,
+	0x6f, 0x72, 0x6f, 0x63, 0x68, 0x65, 0x2e, 0x55, 0x52, 0x4c, 0x52, 0x03, 0x75, 0x72, 0x6c, 0x22,
+	0x66, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x55, 0x52, 0x4c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x2e, 0x0a, 0x09, 0x73, 0x68, 0x6f, 0x72, 0x74, 0x5f, 0x75, 0x72, 0x6c, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x11, 0x2e, 0x6b, 0x6f, 0x72, 0x6f, 0x63, 0x68, 0x65, 0x2e, 0x53,
+	0x68, 0x6f, 0x72, 0x74, 0x55, 0x52, 0x4c, 0x52, 0x08, 0x73, 0x68, 0x6f, 0x72, 0x74, 0x55, 0x72,
+	0x6c, 0x12, 0x24, 0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x0e, 0x2e, 0x6b, 0x6f, 0x72, 0x6f, 0x63, 0x68, 0x65, 0x2e, 0x45, 0x72, 0x72, 0x6f, 0x72,
+	0x52, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x22, 0x20, 0x0a, 0x08, 0x53, 0x68, 0x6f, 0x72, 0x74,
+	0x55, 0x52, 0x4c, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x1b, 0x0a, 0x03, 0x55, 0x52, 0x4c,
+	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x1d, 0x0a, 0x05, 0x45, 0x72, 0x72, 0x6f, 0x72, 0x12,
+	0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
+	0x76, 0x61, 0x6c, 0x75, 0x65, 0x32, 0xf9, 0x01, 0x0a, 0x07, 0x4b, 0x6f, 0x72, 0x6f, 0x63, 0x68,
+	0x65, 0x12, 0x48, 0x0a, 0x04, 0x50, 0x69, 0x6e, 0x67, 0x12, 0x14, 0x2e, 0x6b, 0x6f, 0x72, 0x6f,
+	0x63, 0x68, 0x65, 0x2e, 0x50, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x15, 0x2e, 0x6b, 0x6f, 0x72, 0x6f, 0x63, 0x68, 0x65, 0x2e, 0x50, 0x69, 0x6e, 0x67, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x13, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x0d, 0x22, 0x08,
+	0x2f, 0x76, 0x31, 0x2f, 0x70, 0x69, 0x6e, 0x67, 0x3a, 0x01, 0x2a, 0x12, 0x51, 0x0a, 0x06, 0x41,
+	0x64, 0x64, 0x55, 0x52, 0x4c, 0x12, 0x16, 0x2e, 0x6b, 0x6f, 0x72, 0x6f, 0x63, 0x68, 0x65, 0x2e,
+	0x41, 0x64, 0x64, 0x55, 0x52, 0x4c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x17, 0x2e,
+	0x6b, 0x6f, 0x72, 0x6f, 0x63, 0x68, 0x65, 0x2e, 0x41, 0x64, 0x64, 0x55, 0x52, 0x4c, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x16, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x10, 0x22, 0x0b,
+	0x2f, 0x76, 0x31, 0x2f, 0x75, 0x72, 0x6c, 0x2f, 0x61, 0x64, 0x64, 0x3a, 0x01, 0x2a, 0x12, 0x51,
+	0x0a, 0x06, 0x47, 0x65, 0x74, 0x55, 0x52, 0x4c, 0x12, 0x16, 0x2e, 0x6b, 0x6f, 0x72, 0x6f, 0x63,
+	0x68, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x52, 0x4c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x17, 0x2e, 0x6b, 0x6f, 0x72, 0x6f, 0x63, 0x68, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x52,
+	0x4c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x16, 0x82, 0xd3, 0xe4, 0x93, 0x02,
+	0x10, 0x22, 0x0b, 0x2f, 0x76, 0x31, 0x2f, 0x75, 0x72, 0x6c, 0x2f, 0x67, 0x65, 0x74, 0x3a, 0x01,
+	0x2a, 0x42, 0x09, 0x5a, 0x07, 0x70, 0x6b, 0x67, 0x2f, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -160,19 +541,36 @@ func file_koroche_proto_rawDescGZIP() []byte {
 	return file_koroche_proto_rawDescData
 }
 
-var file_koroche_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_koroche_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_koroche_proto_goTypes = []interface{}{
-	(*PingRequest)(nil),  // 0: koroche.PingRequest
-	(*PingResponse)(nil), // 1: koroche.PingResponse
+	(*PingRequest)(nil),    // 0: koroche.PingRequest
+	(*PingResponse)(nil),   // 1: koroche.PingResponse
+	(*AddURLRequest)(nil),  // 2: koroche.AddURLRequest
+	(*AddURLResponse)(nil), // 3: koroche.AddURLResponse
+	(*GetURLRequest)(nil),  // 4: koroche.GetURLRequest
+	(*GetURLResponse)(nil), // 5: koroche.GetURLResponse
+	(*ShortURL)(nil),       // 6: koroche.ShortURL
+	(*URL)(nil),            // 7: koroche.URL
+	(*Error)(nil),          // 8: koroche.Error
 }
 var file_koroche_proto_depIdxs = []int32{
-	0, // 0: koroche.Koroche.Ping:input_type -> koroche.PingRequest
-	1, // 1: koroche.Koroche.Ping:output_type -> koroche.PingResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	7, // 0: koroche.AddURLRequest.url:type_name -> koroche.URL
+	6, // 1: koroche.AddURLResponse.short_url:type_name -> koroche.ShortURL
+	8, // 2: koroche.AddURLResponse.error:type_name -> koroche.Error
+	7, // 3: koroche.GetURLRequest.url:type_name -> koroche.URL
+	6, // 4: koroche.GetURLResponse.short_url:type_name -> koroche.ShortURL
+	8, // 5: koroche.GetURLResponse.error:type_name -> koroche.Error
+	0, // 6: koroche.Koroche.Ping:input_type -> koroche.PingRequest
+	2, // 7: koroche.Koroche.AddURL:input_type -> koroche.AddURLRequest
+	4, // 8: koroche.Koroche.GetURL:input_type -> koroche.GetURLRequest
+	1, // 9: koroche.Koroche.Ping:output_type -> koroche.PingResponse
+	3, // 10: koroche.Koroche.AddURL:output_type -> koroche.AddURLResponse
+	5, // 11: koroche.Koroche.GetURL:output_type -> koroche.GetURLResponse
+	9, // [9:12] is the sub-list for method output_type
+	6, // [6:9] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_koroche_proto_init() }
@@ -205,6 +603,90 @@ func file_koroche_proto_init() {
 				return nil
 			}
 		}
+		file_koroche_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddURLRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_koroche_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddURLResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_koroche_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetURLRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_koroche_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetURLResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_koroche_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ShortURL); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_koroche_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*URL); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_koroche_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Error); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -212,7 +694,7 @@ func file_koroche_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_koroche_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -239,6 +721,8 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type KorocheClient interface {
 	Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error)
+	AddURL(ctx context.Context, in *AddURLRequest, opts ...grpc.CallOption) (*AddURLResponse, error)
+	GetURL(ctx context.Context, in *GetURLRequest, opts ...grpc.CallOption) (*GetURLResponse, error)
 }
 
 type korocheClient struct {
@@ -258,9 +742,29 @@ func (c *korocheClient) Ping(ctx context.Context, in *PingRequest, opts ...grpc.
 	return out, nil
 }
 
+func (c *korocheClient) AddURL(ctx context.Context, in *AddURLRequest, opts ...grpc.CallOption) (*AddURLResponse, error) {
+	out := new(AddURLResponse)
+	err := c.cc.Invoke(ctx, "/koroche.Koroche/AddURL", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *korocheClient) GetURL(ctx context.Context, in *GetURLRequest, opts ...grpc.CallOption) (*GetURLResponse, error) {
+	out := new(GetURLResponse)
+	err := c.cc.Invoke(ctx, "/koroche.Koroche/GetURL", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // KorocheServer is the server API for Koroche service.
 type KorocheServer interface {
 	Ping(context.Context, *PingRequest) (*PingResponse, error)
+	AddURL(context.Context, *AddURLRequest) (*AddURLResponse, error)
+	GetURL(context.Context, *GetURLRequest) (*GetURLResponse, error)
 }
 
 // UnimplementedKorocheServer can be embedded to have forward compatible implementations.
@@ -269,6 +773,12 @@ type UnimplementedKorocheServer struct {
 
 func (*UnimplementedKorocheServer) Ping(context.Context, *PingRequest) (*PingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+}
+func (*UnimplementedKorocheServer) AddURL(context.Context, *AddURLRequest) (*AddURLResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddURL not implemented")
+}
+func (*UnimplementedKorocheServer) GetURL(context.Context, *GetURLRequest) (*GetURLResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetURL not implemented")
 }
 
 func RegisterKorocheServer(s *grpc.Server, srv KorocheServer) {
@@ -293,6 +803,42 @@ func _Koroche_Ping_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Koroche_AddURL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddURLRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KorocheServer).AddURL(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/koroche.Koroche/AddURL",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KorocheServer).AddURL(ctx, req.(*AddURLRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Koroche_GetURL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetURLRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KorocheServer).GetURL(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/koroche.Koroche/GetURL",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KorocheServer).GetURL(ctx, req.(*GetURLRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Koroche_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "koroche.Koroche",
 	HandlerType: (*KorocheServer)(nil),
@@ -300,6 +846,14 @@ var _Koroche_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Ping",
 			Handler:    _Koroche_Ping_Handler,
+		},
+		{
+			MethodName: "AddURL",
+			Handler:    _Koroche_AddURL_Handler,
+		},
+		{
+			MethodName: "GetURL",
+			Handler:    _Koroche_GetURL_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
