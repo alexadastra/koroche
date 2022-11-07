@@ -60,12 +60,13 @@ push: build
 	@echo "+ $@"
 	@${MANAGER} push $(CONTAINER_IMAGE):$(RELEASE)
 
+# NOTE: container ports should match ones that are in config.yaml
 .PHONY: run
-run: build
+run: 
 	@echo "+ $@"
-	@${MANAGER} run --name ${CONTAINER_NAME} -p ${HTTP_PORT}:${HTTP_PORT} \
-		-p ${HTTP_SECONDARY_PORT}:${HTTP_SECONDARY_PORT} \
-		-p ${GRPC_PORT}:${GRPC_PORT} \
+	@${MANAGER} run --name ${CONTAINER_NAME} -p ${HTTP_PORT}:8080 \
+		-p ${HTTP_SECONDARY_PORT}:8081 \
+		-p ${GRPC_PORT}:6560 \
 		-d $(CONTAINER_IMAGE):$(RELEASE)
 	@sleep 1
 	@${MANAGER} logs ${CONTAINER_NAME}
