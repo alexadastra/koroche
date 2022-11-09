@@ -112,8 +112,8 @@
     "korocheAddURLRequest": {
       "type": "object",
       "properties": {
-        "url": {
-          "$ref": "#/definitions/korocheURL"
+        "user_url": {
+          "$ref": "#/definitions/korocheUserURL"
         }
       }
     },
@@ -140,15 +140,15 @@
       "type": "object",
       "properties": {
         "url": {
-          "$ref": "#/definitions/korocheURL"
+          "$ref": "#/definitions/korocheShortURL"
         }
       }
     },
     "korocheGetURLResponse": {
       "type": "object",
       "properties": {
-        "short_url": {
-          "$ref": "#/definitions/korocheShortURL"
+        "user_url": {
+          "$ref": "#/definitions/korocheUserURL"
         },
         "error": {
           "$ref": "#/definitions/korocheError"
@@ -183,7 +183,7 @@
         }
       }
     },
-    "korocheURL": {
+    "korocheUserURL": {
       "type": "object",
       "properties": {
         "value": {

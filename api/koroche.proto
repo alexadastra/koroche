@@ -35,7 +35,7 @@ message PingResponse {
 }
 
 message AddURLRequest {
-  URL url = 1;
+  UserURL user_url = 1;
 }
 
 message AddURLResponse {
@@ -44,11 +44,11 @@ message AddURLResponse {
 }
 
 message GetURLRequest {
-  URL url = 1;
+  ShortURL url = 1;
 }
 
 message GetURLResponse {
-  ShortURL short_url = 1;
+  UserURL user_url = 1;
   Error error = 2;
 }
 
@@ -56,7 +56,7 @@ message ShortURL {
   string value = 1;
 }
 
-message URL {
+message UserURL {
   string value = 1;
 }
 

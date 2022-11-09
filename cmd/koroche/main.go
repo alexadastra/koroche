@@ -13,6 +13,7 @@ import (
 	"github.com/alexadastra/ramme/service"
 	"github.com/alexadastra/ramme/system"
 
+	koroche_service "github.com/alexadastra/koroche/internal/app/service"
 	advanced "github.com/alexadastra/koroche/internal/config"
 	"github.com/alexadastra/koroche/internal/swagger"
 
@@ -48,7 +49,9 @@ func main() {
 
 	// Setup gRPC servers.
 	baseGrpcServer := grpc.NewServer()
-	userGrpcServer := impl.NewKoroche()
+	userGrpcServer := impl.NewKoroche(
+		&koroche_service.Service{},
+	)
 	api.RegisterKorocheServer(baseGrpcServer, userGrpcServer)
 
 	// Setup gRPC gateway.
