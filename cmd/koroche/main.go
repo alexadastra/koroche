@@ -14,6 +14,7 @@ import (
 	"github.com/alexadastra/ramme/system"
 
 	koroche_service "github.com/alexadastra/koroche/internal/app/service"
+	inmemory "github.com/alexadastra/koroche/internal/app/storage/in_memory"
 	advanced "github.com/alexadastra/koroche/internal/config"
 	"github.com/alexadastra/koroche/internal/swagger"
 
@@ -38,20 +39,43 @@ func main() {
 	}
 	advancedConfig := advancedConfManager.Get()
 
+	// TODO: figure out how to use advanced config
+	// logger.Info(advancedConfig)
+
+	// Serve
+	g := system.NewGroupOperator()
+
+	g.Add(func() error {
+		return basicConfWatcher.Run()
+	}, func(err error) {
+		_ = basicConfWatcher.Close()
+	})
+	g.Add(func() error {
+		return advancedConfWatcher.Run()
+	}, func(err error) {
+		_ = advancedConfWatcher.Close()
+	})
+
+	run(
+		g,
+		impl.NewKoroche(
+			advancedConfig.PingMessage,
+			koroche_service.NewService(
+				inmemory.NewStorage(),
+			),
+		),
+		basicConfig,
+	)
+}
+
+func run(g *system.GroupOperator, userGrpcServer api.KorocheServer, basicConfig *config.BasicConfig) {
 	// Configure service and get router
 	router, logger, err := service.Setup(basicConfig)
 	if err != nil {
 		logger.Fatal(err)
 	}
-
-	// TODO: figure out how to use advanced config
-	logger.Info(advancedConfig)
-
 	// Setup gRPC servers.
 	baseGrpcServer := grpc.NewServer()
-	userGrpcServer := impl.NewKoroche(
-		&koroche_service.Service{},
-	)
 	api.RegisterKorocheServer(baseGrpcServer, userGrpcServer)
 
 	// Setup gRPC gateway.
@@ -80,20 +104,6 @@ func main() {
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
-
-	// Serve
-	g := system.NewGroupOperator()
-
-	g.Add(func() error {
-		return basicConfWatcher.Run()
-	}, func(err error) {
-		_ = basicConfWatcher.Close()
-	})
-	g.Add(func() error {
-		return advancedConfWatcher.Run()
-	}, func(err error) {
-		_ = advancedConfWatcher.Close()
-	})
 
 	grpcListener, err := net.Listen("tcp", fmt.Sprintf("%s:%d", basicConfig.Host, basicConfig.GRPCPort))
 	if err != nil {

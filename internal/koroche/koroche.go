@@ -12,7 +12,8 @@ import (
 
 // Koroche handles stuff
 type Koroche struct {
-	service Service
+	pingMessage string
+	service     Service
 }
 
 // Service is domain laywer wrapper
@@ -22,8 +23,8 @@ type Service interface {
 }
 
 // NewKoroche creates new server
-func NewKoroche(service Service) api.KorocheServer {
-	return &Koroche{service: service}
+func NewKoroche(pingMessage string, service Service) api.KorocheServer {
+	return &Koroche{service: service, pingMessage: pingMessage}
 }
 
 // Ping returns "pong" if ping in pinged
@@ -31,7 +32,7 @@ func (impl *Koroche) Ping(ctx context.Context, request *api.PingRequest) (*api.P
 	if request.Value == "ping" {
 		return &api.PingResponse{
 			Code:  200,
-			Value: "pong",
+			Value: impl.pingMessage,
 		}, nil
 	}
 	return nil, fmt.Errorf("unknown request message: %s", request.Value)
