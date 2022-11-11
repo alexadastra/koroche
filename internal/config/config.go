@@ -13,6 +13,7 @@ type Config struct {
 // AdvancedConfig holds advanced application's configuration
 type AdvancedConfig struct {
 	PingMessage string `yaml:"ping_message"`
+	MongoDBDSN  string `yaml:"mongo_db_dsn"`
 }
 
 // UnmarshalConfig unmarshalls file bytes to advanced config
