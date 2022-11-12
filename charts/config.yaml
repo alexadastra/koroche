@@ -7,3 +7,4 @@ basic:
   is_local_environment: true
 advanced:
   ping_message: Hello Blip Blop
+  mongo_db_dsn: mongodb://admin:mongodbpass@localhost:27017/?maxPoolSize=20&w=majority

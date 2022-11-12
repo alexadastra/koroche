@@ -15,6 +15,7 @@ import (
 
 	koroche_service "github.com/alexadastra/koroche/internal/app/service"
 	inmemory "github.com/alexadastra/koroche/internal/app/storage/in_memory"
+	"github.com/alexadastra/koroche/internal/app/storage/mongodb"
 	advanced "github.com/alexadastra/koroche/internal/config"
 	"github.com/alexadastra/koroche/internal/swagger"
 
@@ -25,22 +26,29 @@ import (
 )
 
 func main() {
-	// Load ENV configuration
-	config.ServiceName = "KOROCHE"
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	// Fetch flags configuration
+	args := advanced.ParseFlags()
+	config.ServiceName = args.ServiceName
+	config.File = args.ConfigPath
+
+	// Fetch basic config
 	basicConfManager, basicConfWatcher, err := config.InitBasicConfig()
 	if err != nil {
 		panic(err)
 	}
 	basicConfig := basicConfManager.GetBasic()
 
+	// Fetch advanced config
 	advancedConfManager, advancedConfWatcher, err := advanced.InitAdvancedConfig()
 	if err != nil {
 		panic(err)
 	}
 	advancedConfig := advancedConfManager.Get()
 
-	// TODO: figure out how to use advanced config
 	// logger.Info(advancedConfig)
+	mongodb.Connect(ctx, advancedConfig.MongoDBDSN)
 
 	// Serve
 	g := system.NewGroupOperator()
