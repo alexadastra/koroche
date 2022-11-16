@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"net"
 	"net/http"
 	"time"
@@ -64,81 +65,81 @@ func main() {
 		_ = advancedConfWatcher.Close()
 	})
 
-	run(
-		g,
-		impl.NewKoroche(
-			advancedConfig.PingMessage,
-			koroche_service.NewService(
-				inmemory.NewStorage(),
-			),
+	userGrpcServer := impl.NewKoroche(
+		advancedConfig.PingMessage,
+		koroche_service.NewService(
+			"", // TODO: fetch from config
+			inmemory.NewStorage(),
 		),
+	)
+
+	baseGrpcServer := grpc.NewServer()
+	api.RegisterKorocheServer(baseGrpcServer, userGrpcServer)
+
+	mux := setupGRPCGateway(ctx, userGrpcServer)
+	mux = setupSwagger(mux, basicConfig)
+
+	run(
+		ctx,
+		g,
+		baseGrpcServer,
+		mux,
 		basicConfig,
 	)
 }
 
-func run(g *system.GroupOperator, userGrpcServer api.KorocheServer, basicConfig *config.BasicConfig) {
-	// Configure service and get router
-	router, logger, err := service.Setup(basicConfig)
-	if err != nil {
-		logger.Fatal(err)
-	}
-	// Setup gRPC servers.
-	baseGrpcServer := grpc.NewServer()
-	api.RegisterKorocheServer(baseGrpcServer, userGrpcServer)
-
-	// Setup gRPC gateway.
-	ctx := context.Background()
-	rmux := runtime.NewServeMux()
+func setupGRPCGateway(ctx context.Context, userGrpcServer api.KorocheServer) *http.ServeMux {
 	mux := http.NewServeMux()
+	rmux := runtime.NewServeMux()
 	mux.Handle("/", rmux)
-	{
-		err = api.RegisterKorocheHandlerServer(ctx, rmux, userGrpcServer)
-		if err != nil {
-			logger.Fatal(err)
-		}
+
+	err := api.RegisterKorocheHandlerServer(ctx, rmux, userGrpcServer)
+	if err != nil {
+		log.Fatal(err)
 	}
 
+	return mux
+}
+
+func setupSwagger(mux *http.ServeMux, basicConfig *config.BasicConfig) *http.ServeMux {
+	// TODO: this prefix workaround should be solved better
 	if basicConfig.IsLocalEnvironment {
 		mux.Handle(swagger.Pattern, swagger.HandlerLocal)
 	} else {
 		mux.Handle(swagger.Pattern, swagger.HandlerK8S)
 	}
 
-	// Setup secondary HTTP handlers
-	// Listen and serve handlers
-	srv := &http.Server{
-		Handler:      router,
-		Addr:         fmt.Sprintf("%s:%d", basicConfig.Host, basicConfig.HTTPSecondaryPort),
-		WriteTimeout: 15 * time.Second,
-		ReadTimeout:  15 * time.Second,
+	return mux
+}
+
+// EVERYTHING HERE IS PURE PLATFORM
+func run(ctx context.Context, g *system.GroupOperator, baseGrpcServer *grpc.Server, mux http.Handler, basicConfig *config.BasicConfig) {
+	// Configure service and get router
+	router, logger, err := service.Setup(basicConfig)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	grpcListener, err := net.Listen("tcp", fmt.Sprintf("%s:%d", basicConfig.Host, basicConfig.GRPCPort))
-	if err != nil {
-		logger.Fatal(err)
-	}
-	g.Add(func() error {
-		logger.Warnf("Serving grpc address %s", fmt.Sprintf("%s:%d", basicConfig.Host, basicConfig.GRPCPort))
-		return baseGrpcServer.Serve(grpcListener)
-	}, func(error) {
-		_ = grpcListener.Close()
+	grpcStart, grpcStop := setupGRPC(baseGrpcServer, basicConfig)
+	g.Add(grpcStart, grpcStop)
+	logger.Warnf("Serving grpc address %s", fmt.Sprintf("%s:%d", basicConfig.Host, basicConfig.GRPCPort))
+
+	httpStart, httpStop := setupHTTP(mux, &httpServerConfig{
+		WriteTimeOut: 15 * time.Second,
+		ReadTimeOut:  15 * time.Second,
+		Host:         basicConfig.Host,
+		Port:         basicConfig.HTTPPort,
 	})
+	g.Add(httpStart, httpStop)
+	logger.Warnf("Serving http address %s", fmt.Sprintf("%s:%d", basicConfig.Host, basicConfig.HTTPPort))
 
-	httpListener, err := net.Listen("tcp", fmt.Sprintf("%s:%d", basicConfig.Host, basicConfig.HTTPPort))
-	if err != nil {
-		logger.Fatal(err)
-	}
-	g.Add(func() error {
-		logger.Warnf("Serving http address %s", fmt.Sprintf("%s:%d", basicConfig.Host, basicConfig.HTTPPort))
-		return http.Serve(httpListener, mux)
-	},
-		func(err error) {
-			_ = httpListener.Close()
-		})
-
-	g.Add(func() error {
-		return srv.ListenAndServe()
-	}, func(err error) {})
+	httpSecStart, httpSecStop := setupHTTP(router, &httpServerConfig{
+		WriteTimeOut: 15 * time.Second,
+		ReadTimeOut:  15 * time.Second,
+		Host:         basicConfig.Host,
+		Port:         basicConfig.HTTPSecondaryPort,
+	})
+	g.Add(httpSecStart, httpSecStop)
 
 	signals := system.NewSignals()
 	g.Add(func() error {
@@ -148,4 +149,30 @@ func run(g *system.GroupOperator, userGrpcServer api.KorocheServer, basicConfig 
 	if err := g.Run(); err != nil {
 		logger.Fatal(err)
 	}
+}
+
+type httpServerConfig struct {
+	WriteTimeOut time.Duration
+	ReadTimeOut  time.Duration
+	Host         string
+	Port         int
+}
+
+func setupHTTP(handler http.Handler, conf *httpServerConfig) (func() error, func(error)) {
+	newSrv := &http.Server{
+		Handler:      handler,
+		Addr:         fmt.Sprintf("%s:%d", conf.Host, conf.Port),
+		WriteTimeout: conf.WriteTimeOut,
+		ReadTimeout:  conf.ReadTimeOut,
+	}
+	return newSrv.ListenAndServe, func(err error) { _ = newSrv.Close() }
+}
+
+// setupGRPC sets up gRPC server
+func setupGRPC(baseGrpcServer *grpc.Server, basicConfig *config.BasicConfig) (func() error, func(error)) {
+	grpcListener, err := net.Listen("tcp", fmt.Sprintf("%s:%d", basicConfig.Host, basicConfig.GRPCPort))
+	if err != nil {
+		log.Fatal(err)
+	}
+	return func() error { return baseGrpcServer.Serve(grpcListener) }, func(err error) { _ = grpcListener.Close() }
 }
